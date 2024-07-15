@@ -7,7 +7,7 @@ class UrlController {
     try {
       const url = await URLService.createLink(query);
       res.status(200).json({
-        url: `${process.env.BACKEND_URL}:${process.env.PORT}/${url.shortUrl}`,
+        url: `${process.env.BACKEND_URL}/${url.shortUrl}`,
       });
     } catch (error) {
       console.error(error);
