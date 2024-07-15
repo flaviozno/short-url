@@ -15,6 +15,6 @@ export const AppDataSource = new DataSource({
   entities: [__dirname + "/../models/*.ts"],
   ssl: {
     rejectUnauthorized: true,
-    ca: fs.readFileSync(__dirname + "/../sa-east-1-bundle.pem").toString(),
+    ca: fs.readFileSync(__dirname + "/../../sa-east-1-bundle.pem").toString(),
   },
 });
