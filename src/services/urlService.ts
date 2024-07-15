@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { URL } from "../models/URL";
-import randomString from "randomString";
+import randomstring from "randomstring";
 import { AppDataSource } from "../db/data-source";
 import { checkDuration, checkLink } from "../utils/index";
 
@@ -18,7 +18,7 @@ class URLService {
     if (!isValid) throw new Error("This url is invalid");
 
     try {
-      let shortUrl = randomString.generate(5);
+      let shortUrl = randomstring.generate(7);
       const existingUrl = await this.repository.findOne({ where: { longUrl } });
 
       const duration = new Date();
@@ -29,6 +29,10 @@ class URLService {
         existingUrl.clicks++;
         return this.repository.save(existingUrl);
       } else {
+        const existingShortUrl = await this.repository.findOne({
+          where: { shortUrl },
+        });
+        if (existingShortUrl) shortUrl = randomstring.generate(7);
         const newUrl = this.repository.create({
           longUrl,
           shortUrl,

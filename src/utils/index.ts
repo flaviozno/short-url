@@ -8,7 +8,7 @@ export const checkLink = (url: string): Promise<boolean> => {
     protocol
       .get(url, (res) => {
         const { statusCode } = res;
-        resolve(statusCode === 200);
+        resolve(statusCode === 200 || statusCode === 999);
       })
       .on("error", (err) => {
         reject(false);
