@@ -3,6 +3,7 @@ import express from "express";
 import "dotenv/config";
 import errorHandler from "./middlewares/errorHandler";
 import notFoundHandler from "./middlewares/notFoundHandler";
+import healthCheckMiddleware from "./middlewares/healthCheckMiddleware";
 import routes from "./routes/router";
 import cors from "cors";
 
@@ -11,6 +12,7 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/health', healthCheckMiddleware)
 app.use(routes);
 app.use(errorHandler);
 app.use(notFoundHandler);
